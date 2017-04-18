@@ -61,6 +61,14 @@ namespace county.feecollections
             trv.Nodes.Add( "Home Phone" );
             trv.Nodes.Add( "Mobile Phone" );
             trv.Nodes.Add( "Probation Officer" );
+            trv.Nodes.Add("Days In Jail");
+            trv.Nodes.Add("Booking Number");
+            //trv.Nodes.Add("Has Judgment Filed");
+            trv.Nodes.Add("Date Of Judgment");
+            trv.Nodes.Add("Judgment Filed Date");
+            //trv.Nodes.Add("In Bankruptcy");
+            trv.Nodes.Add("Bankruptcy Date Filed");
+            trv.Nodes.Add("Bankruptcy End Date");
 
             // node current employer
             node = new TreeNode( "Current Employer" );
@@ -194,8 +202,11 @@ namespace county.feecollections
         {
             if( StoreDirectoryConfigured() && StoreDirectoryExists() )
             {
-                FileInfo template = new FileInfo( templatePath );
-                FileInfo newTemplate = template.CopyTo( Path.Combine( (new LocalUser()).MailMergeDirectory, newTemplateName ) + template.Extension, true );
+                if (File.Exists(templatePath))
+                {
+                    FileInfo template = new FileInfo(templatePath);
+                    FileInfo newTemplate = template.CopyTo(Path.Combine((new LocalUser()).MailMergeDirectory, newTemplateName) + template.Extension, true);
+                }
             }
         }
 
@@ -401,7 +412,7 @@ namespace county.feecollections
         private static Table CreateDataSource( Document wordDoc, Selection wordSel )
         {
             // creating table to store merge field data.
-            Table wrdTable = wordDoc.Tables.Add( wordSel.Range, 2, 57, ref _objMissing, ref _objMissing );
+            Table wrdTable = wordDoc.Tables.Add( wordSel.Range, 2, 63, ref _objMissing, ref _objMissing );
 
             wrdTable.Cell( 1, 1 ).Range.InsertAfter( "First_Name" );
             wrdTable.Cell( 1, 2 ).Range.InsertAfter( "Middle_Name" );
@@ -463,6 +474,15 @@ namespace county.feecollections
             wrdTable.Cell(1, 56).Range.InsertAfter("Civil_Penalties");
             wrdTable.Cell(1, 57).Range.InsertAfter("Jail_Room_And_Board");
 
+            wrdTable.Cell(1, 58).Range.InsertAfter("Days_In_Jail");
+            wrdTable.Cell(1, 59).Range.InsertAfter("Booking_Number");
+            //wrdTable.Cell(1, 60).Range.InsertAfter("Has_Judgment_Filed");
+            wrdTable.Cell(1, 60).Range.InsertAfter("Date_Of_Judgment");
+            wrdTable.Cell(1, 61).Range.InsertAfter("Judgment_Filed_Date");
+            //wrdTable.Cell(1, 63).Range.InsertAfter("In_Bankruptcy");
+            wrdTable.Cell(1, 62).Range.InsertAfter("Bankruptcy_Date_Filed");
+            wrdTable.Cell(1, 63).Range.InsertAfter("Bankruptcy_End_Date");
+
             wordDoc.Save();
             return wrdTable;
         }
@@ -496,7 +516,7 @@ namespace county.feecollections
 
 + "	  			   ) AS plan_remaining_balance, "
 + "                payperiodtype, paymentarrangementtype, PlanPaymentArrangement.amount as payment_arrangement_amount, "
-+ "                startdate, enddate "
++ "                startdate, enddate, daysinjail, bookingnumber, judgmentdate, judgmentfileddate, bankruptcydatefiled, bankruptcyenddate "
 + "           FROM Defendant "
 + "LEFT OUTER JOIN States a ON Defendant.stateid = a.stateid "
 + "LEFT OUTER JOIN DefendantEmployers ON Defendant.defendantid = DefendantEmployers.defendantid AND SeparationDate IS NULL "
@@ -785,6 +805,28 @@ namespace county.feecollections
             wrdTable.Cell(2, 56).Range.InsertAfter("$" + ds.Tables["FeeBreakDown"].Rows[0]["CivilPenalties"].ToString());
             wrdTable.Cell(2, 57).Range.InsertAfter("$" + ds.Tables["FeeBreakDown"].Rows[0]["JailRoomAndBoard"].ToString());
 
+            wrdTable.Cell(2, 58).Range.InsertAfter(ds.Tables["General"].Rows[0]["daysinjail"].ToString());
+            wrdTable.Cell(2, 59).Range.InsertAfter(ds.Tables["General"].Rows[0]["bookingnumber"].ToString());
+            if (DateTime.TryParse(ds.Tables["General"].Rows[0]["judgmentdate"].ToString(), out tempDate))
+            {
+                wrdTable.Cell(2, 60).Range.InsertAfter(tempDate.ToString("d"));
+            }
+            //wrdTable.Cell(2, 61).Range.InsertAfter(ds.Tables["General"].Rows[0]["hasjudgmentfiled"].ToString());
+            if (DateTime.TryParse(ds.Tables["General"].Rows[0]["judgmentfileddate"].ToString(), out tempDate))
+            {
+                wrdTable.Cell(2, 61).Range.InsertAfter(tempDate.ToString("d"));
+            }
+            //wrdTable.Cell(2, 63).Range.InsertAfter(ds.Tables["General"].Rows[0]["inbankruptcy"].ToString());
+            if (DateTime.TryParse(ds.Tables["General"].Rows[0]["bankruptcydatefiled"].ToString(), out tempDate))
+            {
+                wrdTable.Cell(2, 62).Range.InsertAfter(tempDate.ToString("d"));
+            }
+            if (DateTime.TryParse(ds.Tables["General"].Rows[0]["bankruptcyenddate"].ToString(), out tempDate))
+            {
+                wrdTable.Cell(2, 63).Range.InsertAfter(tempDate.ToString("d"));
+            }
+
+
             // entering fee types
             tempStr = "";
             string strFeeType = "";
@@ -906,6 +948,16 @@ namespace county.feecollections
             wrdTable.Cell( 2, 55).Range.InsertAfter("Restitution");
             wrdTable.Cell( 2, 56).Range.InsertAfter("Civil_Penalties");
             wrdTable.Cell( 2, 57).Range.InsertAfter("Jail_Room_And_Board");
+
+            wrdTable.Cell(2, 58).Range.InsertAfter("Days_In_Jail");
+            wrdTable.Cell(2, 59).Range.InsertAfter("Booking_Number");
+            //wrdTable.Cell(2, 60).Range.InsertAfter("Has_Judgment_Filed");
+            wrdTable.Cell(2, 60).Range.InsertAfter("Date_Of_Judgment");
+            wrdTable.Cell(2, 61).Range.InsertAfter("Judgment_Filed_Date");
+            //wrdTable.Cell(2, 63).Range.InsertAfter("In_Bankruptcy");
+            wrdTable.Cell(2, 62).Range.InsertAfter("Bankruptcy_Date_Filed");
+            wrdTable.Cell(2, 63).Range.InsertAfter("Bankruptcy_End_Date");
+
         }
     }
 }
