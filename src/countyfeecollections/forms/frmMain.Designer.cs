@@ -60,22 +60,19 @@ namespace county.feecollections
             this.mnuMainListsPaymentArrangementTypes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainListsRestrictedCasePrefixes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMainToolsOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainToolsOptionsPrintDelinquentLetters = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainReports = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMainReportsSSRS = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuMainReportsMailMerge = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutFeesCollectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStatus = new System.Windows.Forms.StatusStrip();
             this.mnuStatusWindowsUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuStatusVersion = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.pnlScroll = new System.Windows.Forms.Panel();
             this.splitContainerDefendant = new System.Windows.Forms.SplitContainer();
-            this.ucDefendant = new county.feecollections.ucDefendant();
-            this.ucPlans = new county.feecollections.ucPlans();
             this.lblTitleBar = new System.Windows.Forms.Label();
             this.mnuDefendant = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingDefendants = new System.Windows.Forms.BindingSource(this.components);
             this.mnuDefendantNew = new System.Windows.Forms.ToolStripButton();
             this.mnuDefendantSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuDefendantRemove = new System.Windows.Forms.ToolStripButton();
@@ -88,6 +85,12 @@ namespace county.feecollections
             this.mnuDefendantPayment = new System.Windows.Forms.ToolStripButton();
             this.mnuDefendantArchive = new System.Windows.Forms.ToolStripButton();
             this.dgvDefendants = new System.Windows.Forms.DataGridView();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageMailMergeTemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ucDefendant = new county.feecollections.ucDefendant();
+            this.ucPlans = new county.feecollections.ucPlans();
+            this.bindingDefendants = new System.Windows.Forms.BindingSource(this.components);
             this.dgvDefendantsClmLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvDefendantsClmFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ucFilter = new county.feecollections.ucFilter();
@@ -104,8 +107,8 @@ namespace county.feecollections
             this.splitContainerDefendant.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mnuDefendant)).BeginInit();
             this.mnuDefendant.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingDefendants)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefendants)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingDefendants)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuMain
@@ -114,15 +117,19 @@ namespace county.feecollections
             this.mnuMainFile,
             this.mnuMainLists,
             this.mnuMainTools,
-            this.mnuMainReports});
+            this.mnuMainReports,
+            this.helpToolStripMenuItem});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
             this.mnuMain.Size = new System.Drawing.Size(1008, 24);
             this.mnuMain.TabIndex = 0;
+            this.mnuMain.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnuMain_ItemClicked);
             // 
             // mnuMainFile
             // 
             this.mnuMainFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.mnuMainFileExit});
             this.mnuMainFile.Name = "mnuMainFile";
             this.mnuMainFile.Size = new System.Drawing.Size(37, 20);
@@ -131,7 +138,7 @@ namespace county.feecollections
             // mnuMainFileExit
             // 
             this.mnuMainFileExit.Name = "mnuMainFileExit";
-            this.mnuMainFileExit.Size = new System.Drawing.Size(92, 22);
+            this.mnuMainFileExit.Size = new System.Drawing.Size(152, 22);
             this.mnuMainFileExit.Text = "E&xit";
             this.mnuMainFileExit.Click += new System.EventHandler(this.mnuMain_Click);
             // 
@@ -149,59 +156,51 @@ namespace county.feecollections
             // mnuMainListsEmployers
             // 
             this.mnuMainListsEmployers.Name = "mnuMainListsEmployers";
-            this.mnuMainListsEmployers.Size = new System.Drawing.Size(228, 22);
+            this.mnuMainListsEmployers.Size = new System.Drawing.Size(227, 22);
             this.mnuMainListsEmployers.Text = "&Employers";
             this.mnuMainListsEmployers.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainListsFeeTypes
             // 
             this.mnuMainListsFeeTypes.Name = "mnuMainListsFeeTypes";
-            this.mnuMainListsFeeTypes.Size = new System.Drawing.Size(228, 22);
+            this.mnuMainListsFeeTypes.Size = new System.Drawing.Size(227, 22);
             this.mnuMainListsFeeTypes.Text = "Fee Types";
             this.mnuMainListsFeeTypes.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainListsPaymentArrangementTypes
             // 
             this.mnuMainListsPaymentArrangementTypes.Name = "mnuMainListsPaymentArrangementTypes";
-            this.mnuMainListsPaymentArrangementTypes.Size = new System.Drawing.Size(228, 22);
+            this.mnuMainListsPaymentArrangementTypes.Size = new System.Drawing.Size(227, 22);
             this.mnuMainListsPaymentArrangementTypes.Text = "Payment Arrangement Types";
             this.mnuMainListsPaymentArrangementTypes.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainListsRestrictedCasePrefixes
             // 
             this.mnuMainListsRestrictedCasePrefixes.Name = "mnuMainListsRestrictedCasePrefixes";
-            this.mnuMainListsRestrictedCasePrefixes.Size = new System.Drawing.Size(228, 22);
+            this.mnuMainListsRestrictedCasePrefixes.Size = new System.Drawing.Size(227, 22);
             this.mnuMainListsRestrictedCasePrefixes.Text = "Restricted Case Prefixes";
             this.mnuMainListsRestrictedCasePrefixes.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainTools
             // 
             this.mnuMainTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMainToolsOptions,
-            this.mnuMainToolsOptionsPrintDelinquentLetters});
+            this.mnuMainToolsOptionsPrintDelinquentLetters,
+            this.manageMailMergeTemplatesToolStripMenuItem});
             this.mnuMainTools.Name = "mnuMainTools";
-            this.mnuMainTools.Size = new System.Drawing.Size(48, 20);
+            this.mnuMainTools.Size = new System.Drawing.Size(47, 20);
             this.mnuMainTools.Text = "&Tools";
-            // 
-            // mnuMainToolsOptions
-            // 
-            this.mnuMainToolsOptions.Name = "mnuMainToolsOptions";
-            this.mnuMainToolsOptions.Size = new System.Drawing.Size(198, 22);
-            this.mnuMainToolsOptions.Text = "&Options";
-            this.mnuMainToolsOptions.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainToolsOptionsPrintDelinquentLetters
             // 
             this.mnuMainToolsOptionsPrintDelinquentLetters.Name = "mnuMainToolsOptionsPrintDelinquentLetters";
-            this.mnuMainToolsOptionsPrintDelinquentLetters.Size = new System.Drawing.Size(198, 22);
+            this.mnuMainToolsOptionsPrintDelinquentLetters.Size = new System.Drawing.Size(237, 22);
             this.mnuMainToolsOptionsPrintDelinquentLetters.Text = "&Print Delinquent Letters";
             this.mnuMainToolsOptionsPrintDelinquentLetters.Click += new System.EventHandler(this.mnuMain_Click);
             // 
             // mnuMainReports
             // 
             this.mnuMainReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuMainReportsSSRS,
-            this.mnuMainReportsMailMerge});
+            this.mnuMainReportsSSRS});
             this.mnuMainReports.Name = "mnuMainReports";
             this.mnuMainReports.Size = new System.Drawing.Size(59, 20);
             this.mnuMainReports.Text = "&Reports";
@@ -209,16 +208,24 @@ namespace county.feecollections
             // mnuMainReportsSSRS
             // 
             this.mnuMainReportsSSRS.Name = "mnuMainReportsSSRS";
-            this.mnuMainReportsSSRS.Size = new System.Drawing.Size(131, 22);
+            this.mnuMainReportsSSRS.Size = new System.Drawing.Size(152, 22);
             this.mnuMainReportsSSRS.Text = "SSRS";
             this.mnuMainReportsSSRS.Click += new System.EventHandler(this.mnuMain_Click);
             // 
-            // mnuMainReportsMailMerge
+            // helpToolStripMenuItem
             // 
-            this.mnuMainReportsMailMerge.Name = "mnuMainReportsMailMerge";
-            this.mnuMainReportsMailMerge.Size = new System.Drawing.Size(131, 22);
-            this.mnuMainReportsMailMerge.Text = "&MailMerge";
-            this.mnuMainReportsMailMerge.Click += new System.EventHandler(this.mnuMain_Click);
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutFeesCollectionsToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutFeesCollectionsToolStripMenuItem
+            // 
+            this.aboutFeesCollectionsToolStripMenuItem.Name = "aboutFeesCollectionsToolStripMenuItem";
+            this.aboutFeesCollectionsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.aboutFeesCollectionsToolStripMenuItem.Text = "&About Fees Collections...";
+            this.aboutFeesCollectionsToolStripMenuItem.Click += new System.EventHandler(this.aboutFeesCollectionsToolStripMenuItem_Click);
             // 
             // mnuStatus
             // 
@@ -234,7 +241,7 @@ namespace county.feecollections
             // mnuStatusWindowsUserName
             // 
             this.mnuStatusWindowsUserName.Name = "mnuStatusWindowsUserName";
-            this.mnuStatusWindowsUserName.Size = new System.Drawing.Size(883, 17);
+            this.mnuStatusWindowsUserName.Size = new System.Drawing.Size(884, 17);
             this.mnuStatusWindowsUserName.Spring = true;
             this.mnuStatusWindowsUserName.Text = "Windows Username";
             this.mnuStatusWindowsUserName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -242,7 +249,7 @@ namespace county.feecollections
             // mnuStatusVersion
             // 
             this.mnuStatusVersion.Name = "mnuStatusVersion";
-            this.mnuStatusVersion.Size = new System.Drawing.Size(110, 17);
+            this.mnuStatusVersion.Size = new System.Drawing.Size(109, 17);
             this.mnuStatusVersion.Text = "Application Version";
             // 
             // splitContainerMain
@@ -308,31 +315,6 @@ namespace county.feecollections
             this.splitContainerDefendant.TabIndex = 31;
             this.splitContainerDefendant.Resize += new System.EventHandler(this.splitContainerDefendant_Resize);
             // 
-            // ucDefendant
-            // 
-            this.ucDefendant.AutoScroll = true;
-            this.ucDefendant.BackColor = System.Drawing.SystemColors.Control;
-            this.ucDefendant.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDefendant.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDefendant.Location = new System.Drawing.Point(0, 0);
-            this.ucDefendant.MinimumSize = new System.Drawing.Size(561, 2);
-            this.ucDefendant.Name = "ucDefendant";
-            this.ucDefendant.Size = new System.Drawing.Size(750, 370);
-            this.ucDefendant.TabIndex = 19;
-            // 
-            // ucPlans
-            // 
-            this.ucPlans.AutoScroll = true;
-            this.ucPlans.AutoSize = true;
-            this.ucPlans.BackColor = System.Drawing.SystemColors.Control;
-            this.ucPlans.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.ucPlans.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucPlans.Location = new System.Drawing.Point(0, 0);
-            this.ucPlans.MinimumSize = new System.Drawing.Size(683, 420);
-            this.ucPlans.Name = "ucPlans";
-            this.ucPlans.Size = new System.Drawing.Size(750, 470);
-            this.ucPlans.TabIndex = 0;
-            // 
             // lblTitleBar
             // 
             this.lblTitleBar.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -379,10 +361,6 @@ namespace county.feecollections
             this.mnuDefendant.Stretch = true;
             this.mnuDefendant.TabIndex = 1;
             this.mnuDefendant.Text = "Defendant Menu";
-            // 
-            // bindingDefendants
-            // 
-            this.bindingDefendants.DataSource = typeof(county.feecollections.Defendant);
             // 
             // mnuDefendantNew
             // 
@@ -529,6 +507,55 @@ namespace county.feecollections
             this.dgvDefendants.TabIndex = 25;
             this.dgvDefendants.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvDefendants_RowValidating);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // manageMailMergeTemplatesToolStripMenuItem
+            // 
+            this.manageMailMergeTemplatesToolStripMenuItem.Name = "manageMailMergeTemplatesToolStripMenuItem";
+            this.manageMailMergeTemplatesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.manageMailMergeTemplatesToolStripMenuItem.Text = "Manage Mail &Merge Templates";
+            this.manageMailMergeTemplatesToolStripMenuItem.Click += new System.EventHandler(this.manageMailMergeTemplatesToolStripMenuItem_Click);
+            // 
+            // ucDefendant
+            // 
+            this.ucDefendant.AutoScroll = true;
+            this.ucDefendant.BackColor = System.Drawing.SystemColors.Control;
+            this.ucDefendant.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucDefendant.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDefendant.Location = new System.Drawing.Point(0, 0);
+            this.ucDefendant.MinimumSize = new System.Drawing.Size(561, 2);
+            this.ucDefendant.Name = "ucDefendant";
+            this.ucDefendant.Size = new System.Drawing.Size(750, 370);
+            this.ucDefendant.TabIndex = 19;
+            this.ucDefendant.Load += new System.EventHandler(this.ucDefendant_Load);
+            // 
+            // ucPlans
+            // 
+            this.ucPlans.AutoScroll = true;
+            this.ucPlans.AutoSize = true;
+            this.ucPlans.BackColor = System.Drawing.SystemColors.Control;
+            this.ucPlans.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ucPlans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPlans.Location = new System.Drawing.Point(0, 0);
+            this.ucPlans.MinimumSize = new System.Drawing.Size(683, 420);
+            this.ucPlans.Name = "ucPlans";
+            this.ucPlans.Size = new System.Drawing.Size(750, 470);
+            this.ucPlans.TabIndex = 0;
+            // 
+            // bindingDefendants
+            // 
+            this.bindingDefendants.DataSource = typeof(county.feecollections.Defendant);
+            // 
             // dgvDefendantsClmLastName
             // 
             this.dgvDefendantsClmLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -589,8 +616,8 @@ namespace county.feecollections
             ((System.ComponentModel.ISupportInitialize)(this.mnuDefendant)).EndInit();
             this.mnuDefendant.ResumeLayout(false);
             this.mnuDefendant.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingDefendants)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDefendants)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingDefendants)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -602,7 +629,6 @@ namespace county.feecollections
         private System.Windows.Forms.ToolStripMenuItem mnuMainFile;
         private System.Windows.Forms.ToolStripMenuItem mnuMainFileExit;
         private System.Windows.Forms.ToolStripMenuItem mnuMainTools;
-        private System.Windows.Forms.ToolStripMenuItem mnuMainToolsOptions;
         private System.Windows.Forms.ToolStripStatusLabel mnuStatusWindowsUserName;
         private System.Windows.Forms.BindingSource bindingDefendants;
         private System.Windows.Forms.ToolStripStatusLabel mnuStatusVersion;
@@ -612,7 +638,6 @@ namespace county.feecollections
         private System.Windows.Forms.ToolStripMenuItem mnuMainListsPaymentArrangementTypes;
         private System.Windows.Forms.ToolStripMenuItem mnuMainReports;
         private System.Windows.Forms.ToolStripMenuItem mnuMainReportsSSRS;
-        private System.Windows.Forms.ToolStripMenuItem mnuMainReportsMailMerge;
         private System.Windows.Forms.SplitContainer splitContainerMain;
         private System.Windows.Forms.Label lblTitleBar;
         private System.Windows.Forms.BindingNavigator mnuDefendant;
@@ -637,8 +662,10 @@ namespace county.feecollections
         private System.Windows.Forms.ToolStripMenuItem mnuMainListsRestrictedCasePrefixes;
         private System.Windows.Forms.ToolStripButton mnuDefendantPayment;
         private System.Windows.Forms.ToolStripMenuItem mnuMainToolsOptionsPrintDelinquentLetters;
-
-        
-        
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutFeesCollectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem manageMailMergeTemplatesToolStripMenuItem;
     }
 }

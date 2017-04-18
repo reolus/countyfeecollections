@@ -222,15 +222,13 @@ namespace county.feecollections
                 {
 
                     // is the file saved and ready to go since this will involve a copy operation.
-                    if( !_wrdApp.ActiveDocument.Saved )
-                    {
+                    //if( !_wrdApp.ActiveDocument.Saved )
+                    //{
                         _wrdApp.DocumentBeforeSave -= new Microsoft.Office.Interop.Word.ApplicationEvents4_DocumentBeforeSaveEventHandler( _wrdApp_DocumentBeforeSave );
-                        _wrdApp.ActiveDocument.Save();
+                        _wrdApp.ActiveDocument.SaveAs(frm.FileName);
                         _wrdApp.DocumentBeforeSave += new Microsoft.Office.Interop.Word.ApplicationEvents4_DocumentBeforeSaveEventHandler( _wrdApp_DocumentBeforeSave );
-                    }
-
-
-
+                    //}
+                    
                     // check if filename already exists in dir.  
                     if( MailMerge.TemplateExists( frm.FileName )
                             && DialogResult.No == MyMessageBox.Show( this, "MS Word Mail Merge", MyDisplayMessage.OverWriteConfirm ) )

@@ -32,7 +32,7 @@ namespace county.feecollections
     public partial class frmMain : Form
     {      
         private int _intPanelHeight;
-        private int _intRowIndex;
+        //private int _intRowIndex;
         private Defendant _defendantTemp;
         private GridViewState _GridViewState = GridViewState.None;
         private string _strFilter;
@@ -265,14 +265,6 @@ namespace county.feecollections
                 {
                     Environment.Exit( 0 );
                 }
-                else if( sender.Equals( mnuMainToolsOptions ) )
-                {
-                    frmOptions frm = new frmOptions();
-                    frm.FormClosed += new FormClosedEventHandler( frm_FormClosed );
-                    frm.ShowDialog( this );
-
-                    BindData();
-                }
                 else if( sender.Equals( mnuMainListsEmployers ) )
                 {
                     frmEmployers frm = new frmEmployers();
@@ -309,20 +301,6 @@ namespace county.feecollections
                         frm.ShowDialog( this );
                         BindData();
                     }
-                }
-                else if( sender.Equals( mnuMainReportsMailMerge ) )
-                {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    frmMailMerge frm = new frmMailMerge();
-                    if( !frm.IsDisposed )
-                    {
-                        // open, but don't try to own
-                        frm.Show();
-                    }
-
-                    Application.DoEvents();
-                    this.Cursor = Cursors.Default;
                 }
                 else if( sender.Equals( mnuMainReportsSSRS ) )
                 {
@@ -969,7 +947,50 @@ namespace county.feecollections
         #endregion
 
 
+        public void SetJailMode()
+        {
+            this.ucDefendant.SetJailMode();
+            this.ucPlans.SetJailMode();
+        }
 
+        private void ucDefendant_Load(object sender, EventArgs e)
+        {
 
+        }
+
+        private void aboutFeesCollectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            forms.frmAbout box = new forms.frmAbout();
+            box.ShowDialog(this);
+        }
+
+        private void mnuMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOptions frm = new frmOptions();
+            frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
+            frm.ShowDialog(this);
+
+            BindData();
+        }
+
+        private void manageMailMergeTemplatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            frmMailMerge frm = new frmMailMerge();
+            if (!frm.IsDisposed)
+            {
+                // open, but don't try to own
+                frm.Show();
+            }
+
+            Application.DoEvents();
+            this.Cursor = Cursors.Default;
+        }
     }
 }

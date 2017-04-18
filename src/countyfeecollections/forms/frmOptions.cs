@@ -72,7 +72,9 @@ namespace county.feecollections
                 cbbCounties.ValueMember = "countyid";
 
                 cbbCounties.SelectedValue = _user.HomeCountyId;
-                cbxLenientBilling.Checked = _user.LenientBilling;
+                //cbxLenientBilling.Checked = _user.LenientBilling;
+                cbxLenientBilling.Checked = true;
+                cbxJailMode.Checked = _user.JailMode;
             }
             catch
             {
@@ -124,6 +126,7 @@ namespace county.feecollections
         private void InitializeReportsTab()
         {
             txtMailMergeReportDir.DataBindings.Add( "Text", _user, "MailMergeDirectory", true, DataSourceUpdateMode.OnPropertyChanged );
+            txtDocDir.DataBindings.Add("Text", _user, "DocDirectory", true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void btnClose_Click( object sender, EventArgs e )
@@ -153,6 +156,14 @@ namespace county.feecollections
             }
         }
 
+        private void btnDocFolder_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.OK == folderBrowserDialog.ShowDialog(this))
+            {
+                txtDocDir.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
+
 
         #region private void btnSavePreferences_Click( object sender, EventArgs e )
         private void btnSavePreferences_Click( object sender, EventArgs e )
@@ -161,6 +172,7 @@ namespace county.feecollections
             int testInt;
 
             _user.LenientBilling = cbxLenientBilling.Checked;
+            _user.JailMode = cbxJailMode.Checked;
             if( int.TryParse( cbbCounties.SelectedValue.ToString(), out testInt ) )
             {
                 _user.HomeCountyId = testInt;
@@ -168,10 +180,24 @@ namespace county.feecollections
             }
 
             _user.SaveSettings();
+            frmMain main = this.Owner as frmMain;
+            if (null!=main)
+            {
+                main.SetJailMode();
+            }
             MyMessageBox.Show( this, "Preferences", MyDisplayMessage.SaveSuccess );
-        } 
+        }
+
         #endregion
 
+        private void cbxLenientBilling_CheckedChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void txtMailMergeReportDir_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
