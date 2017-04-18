@@ -196,6 +196,7 @@ namespace county.feecollections
             this.ucCases.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
             this.ucCases.Size = new System.Drawing.Size(460, 245);
             this.ucCases.TabIndex = 6;
+            this.ucCases.Load += new System.EventHandler(this.ucCases_Load);
             // 
             // grpPaymentArrangements
             // 

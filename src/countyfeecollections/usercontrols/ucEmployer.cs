@@ -186,12 +186,21 @@ namespace county.feecollections
             this.toolTip.Hide( this.dgvEmployers );
             _intRowIndex = -1;
 
-        } 
+        }
+
+
+
         #endregion
 
+        private void bindingEmployers_CurrentChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void mnuDefendantEmployer_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
 
+        }
     }
 
 }

@@ -243,9 +243,10 @@ namespace county.feecollections
                     // adding case
                     PlanCase plancase = (PlanCase)bindingCases.AddNew();
                     plancase.CaseName = strCaseName;
-                    if( strCaseName.ToUpper().Contains( "NT" ) || strCaseName.ToUpper().Contains( "ST" ) )
+                    if( strCaseName.ToUpper().Contains( "NT" ) || strCaseName.ToUpper().Contains( "ST" ) || strCaseName.ToUpper().Contains("OWMG"))
                     {
                         plancase.CAPP = true;
+                        
                     }
                 }
 
@@ -304,6 +305,13 @@ namespace county.feecollections
                     dgvCases.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightPink;
                 }
 
+
+                if (dgvCases.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToUpper().Contains("NT") || 
+                    dgvCases.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToUpper().Contains("ST") ||
+                    dgvCases.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToUpper().Contains("OWMG"))
+                {
+                    dgvCases.Rows[e.RowIndex].Cells[e.ColumnIndex + 4].Value = true;
+                }
 
                 this.dgvCases.ResumeLayout( false );
                 this.ResumeLayout( false );
